@@ -11,7 +11,11 @@ RUN curl http://ftp.riken.jp/net/apache/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz | t
 RUN ln -s /opt/kafka_2.10-0.8.2.1 /opt/kafka
 RUN mkdir /opt/kafka/kafka-logs
 RUN chown -R root:root /opt/kafka_2.10-0.8.2.1
-RUN sed -i -e 's/^\(log.dirs\)=.*/\1=\/opt\/kafka\/kafka\-logs/g' /opt/kafka/config/server.properties
+RUN sed -i \
+    -e 's/^\(log.dirs\)=.*/\1=\/opt\/kafka\/kafka\-logs/g' \
+    -e 's/^\(log.retention.hours\)=.*/\1=24/g' \
+    -e 's/^\(log.cleaner.enable\)=.*/\1=true/g' \
+    /opt/kafka/config/server.properties
 
 ENV JAVA_HOME /usr/java/default
 
