@@ -1,7 +1,7 @@
 FROM centos:6
 MAINTAINER siniida <sinpukyu@gmail.com>
 
-ENV KAFKA_VERSION=0.9.0.0
+ENV KAFKA_VERSION=0.9.0.1
 
 RUN yum update -y \
     && yum install -y tar
